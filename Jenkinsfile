@@ -15,15 +15,7 @@ pipeline {
     }
 
     stages {
-        // stage('Checkout') {
-        //     steps {
-        //         git branch: "**", url: "${gitRepoName}"
-        //         script {
-        //             gitBranch=getBranchName "${GIT_BRANCH}"
-        //         }
-        //         echo "CHECKING OUT BRANCH   ------  ${gitBranch}"
-        //     }
-        // }
+        
 
 
         stage('Build') {
@@ -31,7 +23,7 @@ pipeline {
                     sh """
                             docker rmi ${apacheLocalImage} || true
                             docker images | grep $mysqlLocalImage
-                            if  [$? -eq 0]
+                            if  ['$?' -eq 0]
                             then
                                 echo "mysql image already exists"
                             else
