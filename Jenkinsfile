@@ -20,9 +20,11 @@ pipeline {
 
         stage('Build') {
             steps {
+                script {
+                    gitBranch=getBranchName "${GIT_BRANCH}"
+                }
                     sh """
-                            gitBranch=getBranchName "${GIT_BRANCH}"
-
+                            echo ${gitBranch}
                             docker rmi ${apacheLocalImage} || true
                         
                             if  docker images | grep $mysqlLocalImage
