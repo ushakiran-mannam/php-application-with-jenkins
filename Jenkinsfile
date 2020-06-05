@@ -22,7 +22,6 @@ pipeline {
             steps {
                     sh """
                             gitBranch=getBranchName "${GIT_BRANCH}"
-                            echo ${gitBranch}
 
                             docker rmi ${apacheLocalImage} || true
                         
