@@ -4,7 +4,7 @@ def dockerPublisherName = "ushakiran20"
 def apacheLocalImage = "apache2-updated"
 def mysqlLocalImage = "mysql-updated"
 
-// def gitBranch
+def gitBranch
 
 properties([pipelineTriggers([githubPush()])])
 pipeline {
