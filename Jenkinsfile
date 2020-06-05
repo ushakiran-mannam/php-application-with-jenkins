@@ -22,13 +22,14 @@ pipeline {
             steps {
                     sh """
                             docker rmi ${apacheLocalImage} || true
-                            docker images | grep $mysqlLocalImage
-                            if  ['${?}' -eq 0]
+                        
+                            if  docker images | grep $mysqlLocalImage
                             then
                                 echo "mysql image already exists"
                             else
                                 docker build -t ${mysqlLocalImage} mysql/
                                 docker tag ${mysqlLocalImage} ${dockerPublisherName}/${mysqlLocalImage}
+                            fi
                             docker build -t ${apacheLocalImage} apache/
                         """
                     sh "docker tag ${apacheLocalImage} ${dockerPublisherName}/${apacheLocalImage}"
