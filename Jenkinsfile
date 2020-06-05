@@ -68,6 +68,11 @@ pipeline {
         //         }
         //     }
         // }
+           stage('Deploy') {
+               steps {
+                   sh "docker stack deploy --compose-file docker-compose.yml dockerstack3"
+               }
+           }
 
         // stage('Deploy') {
         //     steps {
