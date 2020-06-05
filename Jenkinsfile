@@ -30,7 +30,7 @@ pipeline {
             steps {
                     sh """
                             docker rmi ${apacheLocalImage} || true
-                            docker images | grep ${mysqlLocalImage}
+                            docker images | grep $mysqlLocalImage
                             if  [$? -eq 0]
                             then
                                 echo "mysql image already exists"
