@@ -21,6 +21,9 @@ pipeline {
         stage('Build') {
             steps {
                     sh """
+                            gitBranch=getBranchName "${GIT_BRANCH}"
+                            echo ${gitBranch}
+
                             docker rmi ${apacheLocalImage} || true
                         
                             if  docker images | grep $mysqlLocalImage
@@ -75,6 +78,6 @@ pipeline {
 //     '''
 // }
 
-// String getBranchName(String inputString) {
-//     return inputString.split("/")[1]
-// }
+String getBranchName(String inputString) {
+    return inputString.split("/")[1]
+}
