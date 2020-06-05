@@ -36,74 +36,13 @@ pipeline {
             }
         }
 
-
-        // stage('Publish') {
-        //     steps {
-        //         script {
-        //             if (gitBranch == 'master' || gitBranch == 'develop'){
-        //                 sh "docker tag ${customLocalImage} ${dockerPublisherName}/${dockerRepoName}:${gitBranch}-0.0.${BUILD_NUMBER}"
-        //                 sh "docker tag ${customLocalImage} ${dockerPublisherName}/${dockerRepoName}:latest"
-        //                 sh "docker push ${dockerPublisherName}/${dockerRepoName}"
-        //                 sendSlackMessage "Publish Successul"
-        //             } else if (gitBranch.contains('feature')) {
-        //                 echo "It is a feature branch"
-        //             }
-        //         }
-        //     }
-        // }
-        
-        // stage('Stage') {
-        //     steps {
-        //         script {
-        //             if (gitBranch == 'master' || gitBranch == 'develop'){
-        //                 sh "docker stop lamp-web || true"
-        //                 sh "docker rm lamp-web || true"
-        //                 sh "docker stop lamp-mysql || true"
-        //                 sh "docker rm lamp-mysql || true"
-                        
-        //                 sh "docker-compose up -d"
-        //             } else if (gitBranch.contains('feature')) {
-        //                 echo "It is a feature branch"
-        //             }
-        //         }
-        //     }
-        // }
            stage('Deploy') {
                steps {
                    sh "docker stack deploy --compose-file docker-compose.yml dockerstack3"
                }
            }
 
-        // stage('Deploy') {
-        //     steps {
-
-        //         script {
-        //             if (gitBranch == 'master'){
-        //                 echo "Master "
-
-        //                 ECS_REGISTRY="572508813856.dkr.ecr.us-east-1.amazonaws.com"
-        //                 ECR_REPO="jenkins-test-repo"
-                        
-        //                 // sh 'bash ./aws-ecs-deploy.sh'
-
-        //                 sh """
-        //                     docker tag ${customLocalImage} ${ECS_REGISTRY}/${ECR_REPO}:0.0.${BUILD_NUMBER}
-        //                     docker tag ${customLocalImage} ${ECS_REGISTRY}/${ECR_REPO}:latest
-        //                     echo "${ECS_REGISTRY}/${ECR_REPO}"
-        //                     docker push ${ECS_REGISTRY}/${ECR_REPO}
-        //                 """
-        //                 // sh "docker stop lamp-web || true"
-        //                 // sh "docker rm lamp-web || true"
-        //                 // sh "docker stop lamp-mysql || true"
-        //                 // sh "docker rm lamp-mysql || true"
-                        
-        //                 // sh "docker-compose up -d"
-        //             } else if (gitBranch.contains('feature')) {
-        //                 echo "It is a feature branch"
-        //             }
-        //         }
-        //     }
-        // }
+        
 
         // stage('Clean') {
         //     steps {
